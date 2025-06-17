@@ -15,15 +15,15 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class Config:
+class ModelConfig:
     feat_dim: int = 32
-    latent_dim: int = 64
+    latent_dim: int = 128
     channels: int = 1
 
 
 class Encoder(nn.Module):
 
-    def __init__(self, config: Config):
+    def __init__(self, config: ModelConfig):
         super(Encoder, self).__init__()
         self.config = config
 
@@ -67,7 +67,7 @@ class Encoder(nn.Module):
 
 class Decoder(nn.Module):
 
-    def __init__(self, config: Config):
+    def __init__(self, config: ModelConfig):
         super(Decoder, self).__init__()
         self.config = config
 
@@ -131,12 +131,12 @@ class Decoder(nn.Module):
 
 class AutoEncoder(nn.Module):
 
-    def __init__(self, config: Config):
+    def __init__(self, config: ModelConfig):
         super(AutoEncoder, self).__init__()
         self.encoder = Encoder(config)
         self.decoder = Decoder(config)
 
     def forward(self, x):
-        z = self.encoder(x)
-        x_hat = self.decoder(z)
-        return x_hat
+        encoding = self.encoder(x)
+        x_hat = self.decoder(encoding)
+        return x_hat, encoding
