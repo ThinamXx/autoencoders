@@ -21,7 +21,6 @@ class Config:
 
 def train_ae(config: Config):
     # 1. Initialize the configurations:
-    batch_size = config.batch_size
     learning_rate = config.learning_rate
     num_epochs = config.num_epochs
     noise_level = config.noise_level
@@ -98,7 +97,7 @@ def train_ae(config: Config):
         with open(log_file, "a") as f:
             f.write(f"{epoch_log}\n")
 
-        if (epoch + 1) % 5 == 0:
+        if (epoch + 1) % 20 == 0:
             checkpoint_path = os.path.join(log_dir, f"autoencoder_epoch_{epoch+1}.pth")
             torch.save(
                 {
@@ -125,9 +124,10 @@ def train_ae(config: Config):
 if __name__ == "__main__":
     config = Config(
         model_config=ModelConfig(
-            feat_dim=32,
+            hidden_dim=[32, 64, 128, 256],
             latent_dim=128,
-            channels=1,
+            in_channels=1,
+            image_size=32,
         ),
         dataloader_config=DataLoaderConfig(
             batch_size=16, num_workers=4, image_size=32, download=True

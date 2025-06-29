@@ -7,7 +7,6 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional, Tuple, Union
 
-import torch
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader, Dataset
