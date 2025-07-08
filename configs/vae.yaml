@@ -1,0 +1,32 @@
+
+model:
+  type: "vae"
+  hidden_dim: [32, 64, 128, 256]
+  latent_dim: 128
+  in_channels: 1
+  image_size: 32
+  beta: 1.0  # KL divergence weight.
+
+data:
+  dataset: "mnist"
+  batch_size: 16
+  num_workers: 4
+  image_size: 32
+  normalize_mean: 0.5
+  normalize_std: 0.5
+  download: true
+  data_root: "./data"
+
+training:
+  learning_rate: 0.0001
+  num_epochs: 50
+  device: "cuda"
+  save_interval: 10
+  log_dir: "./logs"
+
+optimizer:
+  type: "adam"
+  weight_decay: 0.0
+
+loss:
+  type: "vae"  # VAE loss (reconstruction + KL divergence). 

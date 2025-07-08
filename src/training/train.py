@@ -4,8 +4,8 @@ import torch.nn as nn
 from dataclasses import dataclass
 from tqdm import tqdm
 
-from autoencoder import AutoEncoder, ModelConfig
-from dataloader import MNISTDataLoader, DataLoaderConfig
+from src.models.autoencoder import AutoEncoder, ModelConfig
+from src.data.dataloader import MNISTDataLoader, DataLoaderConfig
 
 
 @dataclass
